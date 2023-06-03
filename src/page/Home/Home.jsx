@@ -17,7 +17,7 @@ const Home = () => {
   }, []);
   return (
     <main>
-      <h1>Top Movies for today</h1>
+      <h1 className={c.h}>Top Movies for today</h1>
       <ul>
         {loader && <Loader />}
         {trandMovie.map(movie => (
