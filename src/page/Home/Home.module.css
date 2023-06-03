@@ -1,0 +1,14 @@
+h1 {
+  margin-left: 26px;
+}
+a {
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 5px;
+  color: black;
+  font-size: 25px;
+}
+
+a:hover {
+  color: orangered;
+}

@@ -1,24 +1,32 @@
-// import { useState, useEffect } from 'react';
 // import { useLocation } from 'react-router-dom';
-// import { Title } from './Home.styled';
-// import { getTrending } from '../../Api/apiService';
 // import { Loader } from 'components/Loader/Loader';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getTrending } from 'service/Api';
+import c from './Home.module.css';
+import { Loader } from 'components/Loader/Loader';
 
 const Home = () => {
+  const [trandMovie, setTrandMovie] = useState([]);
+  const [loader, setLoader] = useState(false);
+  useEffect(() => {
+    setLoader(true);
+    getTrending().then(r => {
+      setTrandMovie(r.results);
+      setLoader(false);
+    });
+  }, []);
   return (
     <main>
       <h1>Top Movies for today</h1>
-      {/* <Title>Top Movies for today</Title> */}
-      {/* <MovieList>
-        {trendMovies.map(movie => (
+      <ul>
+        {loader && <Loader />}
+        {trandMovie.map(movie => (
           <li key={movie.id}>
-            <MovieLink to={`/movies/${movie.id}`} state={{ from: location }}>
-              {movie.original_title || movie.name}
-            </MovieLink>
+            <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
           </li>
         ))}
-        {isLoading && <Loader />}
-      </MovieList> */}
+      </ul>
     </main>
   );
 };
