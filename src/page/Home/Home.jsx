@@ -1,7 +1,5 @@
-// import { useLocation } from 'react-router-dom';
-// import { Loader } from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getTrending } from 'service/Api';
 import c from './Home.module.css';
 import { Loader } from 'components/Loader/Loader';
@@ -9,6 +7,7 @@ import { Loader } from 'components/Loader/Loader';
 const Home = () => {
   const [trandMovie, setTrandMovie] = useState([]);
   const [loader, setLoader] = useState(false);
+  const location = useLocation();
   useEffect(() => {
     setLoader(true);
     getTrending().then(r => {
@@ -23,7 +22,9 @@ const Home = () => {
         {loader && <Loader />}
         {trandMovie.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+              {movie.original_title}
+            </Link>
           </li>
         ))}
       </ul>

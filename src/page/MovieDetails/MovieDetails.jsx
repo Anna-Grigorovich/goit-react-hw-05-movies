@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'service/Api';
 import c from './MovieDetails.module.css';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const [movies, setMovies] = useState({});
   const { movieId } = useParams();
-  const poster = `https://image.tmdb.org/t/p/w300/${movies.poster_path}`;
+  const location = useLocation();
+  const backLocation = useRef(location.state?.from ?? '/');
   const score = (movies.vote_average * 10).toFixed(0);
-  const { original_title, overview, genres, poster_path, vote_average } =
-    movies;
+  const { original_title, overview, genres, poster_path } = movies;
   useEffect(() => {
     getMovieDetails(movieId).then(r => {
       setMovies(r);
@@ -17,6 +18,7 @@ const MovieDetails = () => {
   }, [movieId]);
   return (
     <div className={c.container}>
+      <Link to={backLocation.current}>Go to back</Link>
       <div className={c.wrapperMovie}>
         <img
           src={
@@ -53,12 +55,15 @@ const MovieDetails = () => {
             </Link>
           </li>
           <li className={c.infoItem}>
-            <Link to="/reviews">
+            <Link to="reviews">
               <button className={c.Btn}>REVIEWS</button>
             </Link>
           </li>
         </ul>
       </div>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
