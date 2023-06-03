@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/168.9d36f9da.chunk.css","mappings":"AAAA,2BACE,wBAAyB,CACzB,kBAAmB,CACnB,YAAa,CACb,YACF","sources":["components/Reviews/Reviews.module.css"],"sourcesContent":[".itemComent {\n  border: 1px solid #e0e0e0;\n  border-radius: 10px;\n  padding: 20px;\n  width: 1080px;\n}\n"],"names":[],"sourceRoot":""}
