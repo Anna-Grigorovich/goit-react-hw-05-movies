@@ -1,5 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 import { getMovieDetails } from 'service/Api';
 import c from './MovieDetails.module.css';
 import { Loader } from 'components/Loader/Loader';
@@ -11,11 +12,23 @@ const MovieDetails = () => {
   const backLocation = useRef(location.state?.from ?? '/');
   const score = (movies.vote_average * 10).toFixed(0);
   const { original_title, overview, genres, poster_path } = movies;
+
   useEffect(() => {
     getMovieDetails(movieId).then(r => {
       setMovies(r);
     });
   }, [movieId]);
+
+  console.log('movies', movies);
+
+  if (!original_title) {
+    return (
+      <>
+        <Navigate to="/" replace={true} />
+      </>
+    );
+  }
+
   return (
     <div className={c.container}>
       <Link to={backLocation.current}>Go to back</Link>
