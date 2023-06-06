@@ -19,8 +19,6 @@ const MovieDetails = () => {
     });
   }, [movieId]);
 
-  console.log('movies', movies);
-
   if (!original_title) {
     return (
       <>

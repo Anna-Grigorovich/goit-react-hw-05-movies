@@ -6,6 +6,7 @@ import { Layout } from './Layout/Layout';
 // import Cast from './Cast/Cast';
 // import Reviews from './Reviews/Reviews';
 import { lazy } from 'react';
+import { Error } from 'page/Error/Error';
 
 const Home = lazy(() => import('page/Home/Home'));
 const Movies = lazy(() => import('page/Movies/Movies'));
@@ -25,7 +26,7 @@ export const App = () => {
           <Route path="reviews" element={<Reviews />} />
         </Route>
 
-        {/* <Route path="*" element={<Home />} /> */}
+        <Route path="*" element={<Error />} />
       </Route>
     </Routes>
   );
