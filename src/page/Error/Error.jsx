@@ -1,4 +1,3 @@
-const { Link } = require("react-router-dom")
 
 export const Error = () => {
     return(
