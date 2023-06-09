@@ -19,7 +19,7 @@ const MovieDetails = () => {
     });
   }, [movieId]);
 
-  if (!original_title) {
+  if (original_title === '') {
     return (
       <>
         <Navigate to="/" replace={true} />
